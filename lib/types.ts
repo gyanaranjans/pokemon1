@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 export interface PokemonType {
   name: string;
   url: string;
@@ -51,7 +53,7 @@ export interface Pokemon {
 export interface DailyRandomCache {
   date: string;
   pokemonId: number;
-  pokemon: Pokemon;
+  pokemon?: Types.ObjectId;
   expiresAt: Date;
 }
 
