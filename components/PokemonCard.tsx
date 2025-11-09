@@ -1,17 +1,17 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { Pokemon } from '@/lib/types';
+import Link from 'next/link'
+import { Pokemon } from '@/lib/types'
 
 interface PokemonCardProps {
-  pokemon: Pokemon;
+  pokemon: Pokemon
 }
 
 export default function PokemonCard({ pokemon }: PokemonCardProps) {
   const imageUrl =
     pokemon.sprites.other?.['official-artwork']?.front_default ||
     pokemon.sprites.front_default ||
-    '/placeholder-pokemon.png';
+    '/placeholder-pokemon.png'
 
   const typeColors: Record<string, string> = {
     normal: 'bg-gray-400',
@@ -32,7 +32,7 @@ export default function PokemonCard({ pokemon }: PokemonCardProps) {
     dark: 'bg-gray-800',
     steel: 'bg-gray-500',
     fairy: 'bg-pink-300',
-  };
+  }
 
   return (
     <Link
@@ -74,6 +74,5 @@ export default function PokemonCard({ pokemon }: PokemonCardProps) {
         </div>
       </div>
     </Link>
-  );
+  )
 }
-

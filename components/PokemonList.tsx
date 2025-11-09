@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import { Pokemon } from '@/lib/types';
-import PokemonCard from './PokemonCard';
+import { Pokemon } from '@/lib/types'
+import PokemonCard from './PokemonCard'
 
 interface PokemonListProps {
-  pokemon: Pokemon[];
+  pokemon: Pokemon[]
 }
 
 export default function PokemonList({ pokemon }: PokemonListProps) {
@@ -13,7 +13,7 @@ export default function PokemonList({ pokemon }: PokemonListProps) {
       <div className="text-center py-12">
         <p className="text-gray-500 text-lg">No Pokemon found</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -22,6 +22,5 @@ export default function PokemonList({ pokemon }: PokemonListProps) {
         <PokemonCard key={p.id} pokemon={p} />
       ))}
     </div>
-  );
+  )
 }
-
