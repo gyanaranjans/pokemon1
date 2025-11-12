@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import SearchBar from '@/components/SearchBar';
 import PokemonList from '@/components/PokemonList';
 import { Pokemon } from '@/lib/types';
+import { headers } from 'next/headers';
 
 interface SearchPageProps {
   searchParams: Promise<{ q?: string }>;
@@ -9,8 +10,13 @@ interface SearchPageProps {
 
 async function searchPokemon(query: string): Promise<Pokemon[]> {
   try {
+    const headersList = await headers();
+    const host = headersList.get('host') || 'localhost:3000';
+    const protocol = headersList.get('x-forwarded-proto') || 'http';
+    const baseUrl = `${protocol}://${host}`;
+    
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/pokemon/search?q=${encodeURIComponent(query)}`,
+      `${baseUrl}/api/pokemon/search?q=${encodeURIComponent(query)}`,
       {
         cache: 'no-store',
       }

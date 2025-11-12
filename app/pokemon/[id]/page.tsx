@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import PokemonDetails from '@/components/PokemonDetails';
 import { Pokemon } from '@/lib/types';
+import { headers } from 'next/headers';
 
 interface PokemonPageProps {
   params: Promise<{ id: string }>;
@@ -10,7 +11,12 @@ interface PokemonPageProps {
 
 async function getPokemon(id: string): Promise<Pokemon | null> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/pokemon/${id}`, {
+    const headersList = await headers();
+    const host = headersList.get('host') || 'localhost:3000';
+    const protocol = headersList.get('x-forwarded-proto') || 'http';
+    const baseUrl = `${protocol}://${host}`;
+    
+    const res = await fetch(`${baseUrl}/api/pokemon/${id}`, {
       cache: 'no-store',
     });
 
